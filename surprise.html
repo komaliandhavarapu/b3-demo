@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenWithLove · A Little Surprise</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.surprise-page{min-height:100vh;overflow:hidden;background:radial-gradient(circle at 50% 35%,#fff8fb 0,#f8e9f5 34%,#e9ddf6 72%,#dfd2ed 100%)}
+.surprise-page .wrap{position:relative}
+.intro-line{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#84698e;margin:0 0 4px}
+.flower-garden{position:relative;width:min(620px,94vw);height:330px;margin:18px auto 10px}
+.flower-btn{position:absolute;border:0;background:transparent;cursor:pointer;padding:0;transform:translate(-50%,-50%);filter:drop-shadow(0 13px 13px rgba(87,54,103,.14));transition:transform .35s,filter .35s;z-index:3}
+.flower-btn:hover{transform:translate(-50%,-50%) scale(1.08) rotate(-3deg);filter:drop-shadow(0 18px 18px rgba(87,54,103,.22))}
+.flower-btn:active{transform:translate(-50%,-50%) scale(.92)}
+.flower-btn .stem{display:block;width:5px;height:82px;background:linear-gradient(#719a73,#547d5e);border-radius:9px;margin:0 auto -12px;transform:rotate(3deg)}
+.flower-btn .bloom{display:block;font-size:4.7rem;line-height:1}
+.flower-btn .leaf{position:absolute;width:24px;height:12px;background:#78a67c;border-radius:100% 0 100% 0;bottom:53px;left:50%;transform:rotate(-25deg)}
+.flower-btn .leaf.r{transform:rotate(25deg) scaleX(-1);left:52%}
+.flower-btn.used{pointer-events:none;animation:petalBurst .65s forwards}
+.flower-btn:nth-child(1){left:17%;top:48%;transform:translate(-50%,-50%) rotate(-8deg)}
+.flower-btn:nth-child(2){left:36%;top:27%;transform:translate(-50%,-50%) rotate(5deg)}
+.flower-btn:nth-child(3){left:50%;top:58%;transform:translate(-50%,-50%) rotate(-3deg)}
+.flower-btn:nth-child(4){left:66%;top:30%;transform:translate(-50%,-50%) rotate(8deg)}
+.flower-btn:nth-child(5){left:83%;top:50%;transform:translate(-50%,-50%) rotate(-7deg)}
+.flower-btn:nth-child(1) .bloom{font-size:4.4rem}.flower-btn:nth-child(2) .bloom{font-size:4rem}.flower-btn:nth-child(3) .bloom{font-size:5rem}.flower-btn:nth-child(4) .bloom{font-size:4.2rem}.flower-btn:nth-child(5) .bloom{font-size:4.6rem}
+.flower-hint{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:#9a789f;margin-top:-5px}
+.message-card{display:none;width:min(640px,92vw);margin:10px auto 25px;padding:38px 34px;background:#fffdf9;border:1px solid rgba(255,255,255,.9);border-radius:8px;box-shadow:0 28px 70px rgba(77,53,92,.2);position:relative;text-align:center;animation:cardReveal .8s ease both}
+.message-card:before,.message-card:after{content:'✿';position:absolute;color:#d995b0;font-size:1.2rem}.message-card:before{left:18px;top:14px}.message-card:after{right:18px;bottom:14px}
+.message-card.show{display:block}
+.message-card .label{font-size:.65rem;letter-spacing:.25em;color:#a26c8c;text-transform:uppercase}.message-card p{font:1.45rem/1.75 'Cormorant Garamond',serif;color:#57465d;margin:16px 0 5px}
+.message-card .mini{font-size:.78rem;letter-spacing:.08em;color:#9b829d;margin-top:12px}
+.progress{display:flex;justify-content:center;gap:8px;margin:3px auto 4px}.dot{width:7px;height:7px;border-radius:50%;background:#d8c6df;transition:.3s}.dot.on{background:#b9799c;transform:scale(1.2)}
+.petal{position:fixed;top:-30px;pointer-events:none;z-index:1;animation:fall linear forwards;font-size:1rem;opacity:.7}
+@keyframes cardReveal{from{opacity:0;transform:translateY(22px) rotate(-1deg)}to{opacity:1;transform:none}}
+@keyframes petalBurst{to{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(40deg)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+@media(max-width:600px){.flower-garden{height:285px}.flower-btn .bloom{font-size:3.8rem}.flower-btn:nth-child(3) .bloom{font-size:4.2rem}.message-card{padding:32px 23px}.message-card p{font-size:1.28rem}.flower-btn:nth-child(1){left:14%}.flower-btn:nth-child(5){left:86%}}
+</style>
+</head>
+<body>
+<button class="music" id="music" type="button" aria-pressed="false">♫ Play music</button>
+<section class="page surprise-page">
+  <div class="wrap">
+    <p class="intro-line">one tiny surprise, made just for you</p>
+    <small>there is something waiting</small>
+    <h2 id="title"></h2>
+    <p id="sub"></p>
+
+    <div class="progress" id="progress"></div>
+    <div class="flower-garden" id="garden" aria-label="Five flowers to discover">
+      <button class="flower-btn" aria-label="Open flower 1"><span class="bloom">🌷</span><span class="stem"></span><span class="leaf"></span></button>
+      <button class="flower-btn" aria-label="Open flower 2"><span class="bloom">🌸</span><span class="stem"></span><span class="leaf"></span><span class="leaf r"></span></button>
+      <button class="flower-btn" aria-label="Open flower 3"><span class="bloom">🌺</span><span class="stem"></span><span class="leaf"></span></button>
+      <button class="flower-btn" aria-label="Open flower 4"><span class="bloom">🌷</span><span class="stem"></span><span class="leaf"></span><span class="leaf r"></span></button>
+      <button class="flower-btn" aria-label="Open flower 5"><span class="bloom">🌼</span><span class="stem"></span><span class="leaf"></span></button>
+    </div>
+    <div class="flower-hint" id="hint">tap the flowers, one by one</div>
+
+    <article class="message-card" id="card">
+      <div class="label">a little note for you</div>
+      <p id="text"></p>
+      <div class="mini">some moments are meant to be kept forever ♡</div>
+    </article>
+    <a class="btn" id="next" href="favorite.html" style="display:none">One more thing ♥</a>
+  </div>
+</section>
+<script src="config.js"></script>
+<script>
+const c=customer;
+const $=id=>document.getElementById(id);
+$('title').textContent=c.surpriseTitle;
+$('sub').textContent=c.surpriseSub;
+$('text').textContent=c.surpriseText;
+const flowers=[...document.querySelectorAll('.flower-btn')];
+const progress=$('progress');
+flowers.forEach(()=>{const d=document.createElement('span');d.className='dot';progress.appendChild(d)});
+const dots=[...progress.children];
+let opened=0;
+function petals(){
+  for(let i=0;i<7;i++){
+    const p=document.createElement('span');p.className='petal';p.textContent=['🌸','💗','✿'][Math.floor(Math.random()*3)];
+    p.style.left=(Math.random()*100)+'vw';p.style.animationDuration=(3.8+Math.random()*2.5)+'s';p.style.animationDelay=(Math.random()*.3)+'s';
+    document.body.appendChild(p);setTimeout(()=>p.remove(),7000);
+  }
+}
+flowers.forEach((flower,i)=>flower.addEventListener('click',()=>{
+  if(flower.classList.contains('used')) return;
+  flower.classList.add('used');dots[i].classList.add('on');opened++;petals();
+  if(opened===flowers.length){
+    setTimeout(()=>{
+      $('garden').style.display='none';$('hint').style.display='none';$('card').classList.add('show');$('next').style.display='inline-block';
+    },500);
+  }
+}));
+</script>
+<script src="app.js" data-persistent></script>
+</body>
+</html>

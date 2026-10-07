@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenWithLove · Until Our Next Memory</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#fff8fb;--soft:#eaddea;--pink:#ff9fc2;--violet:#9b7bd5;--deep:#21172f}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:'DM Sans',sans-serif;color:var(--ink);overflow-x:hidden}
+body{background:radial-gradient(circle at 50% 8%,#4d3769 0%,#30203f 38%,#170f25 78%,#0e0917 100%);}
+body:before,body:after{content:"";position:fixed;border-radius:50%;pointer-events:none;filter:blur(75px);opacity:.25;z-index:0}
+body:before{width:330px;height:330px;background:#b58cff;left:-130px;top:5%}
+body:after{width:300px;height:300px;background:#ff86b7;right:-120px;bottom:0}
+.page{min-height:100vh;padding:80px 18px 55px;display:grid;place-items:center;position:relative;overflow:hidden}
+.stars{position:absolute;inset:0;pointer-events:none;opacity:.7;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#fff 1px,transparent 1px);background-size:95px 95px,145px 145px;background-position:10px 25px,55px 70px}
+.orbit{position:absolute;width:min(720px,90vw);height:min(720px,90vw);border:1px solid #ffffff12;border-radius:50%;animation:spin 28s linear infinite}
+.orbit:before,.orbit:after{content:'♡';position:absolute;color:#ffb5cf;font-size:20px}.orbit:before{top:7%;left:18%}.orbit:after{bottom:11%;right:15%;font-size:15px}
+.music{position:fixed;right:15px;top:15px;z-index:20;border:1px solid #ffffff24;background:#ffffff14;color:#fff;border-radius:999px;padding:10px 14px;backdrop-filter:blur(12px);cursor:pointer;font:400 .72rem 'DM Sans'}
+.wrap{width:min(820px,100%);text-align:center;position:relative;z-index:2}
+.eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.67rem;color:#d8b9d6;margin-bottom:16px}
+h1{font:600 clamp(3.6rem,9vw,7rem)/.88 'Cormorant Garamond',serif;margin:0;color:#fff8fb}
+h1 span{color:var(--pink)}
+.intro{max-width:650px;margin:22px auto 30px;color:var(--soft);line-height:1.85;font-weight:300;font-size:1rem}
+.envelope{width:min(150px,32vw);aspect-ratio:1.15/1;margin:0 auto 27px;position:relative;filter:drop-shadow(0 20px 35px #0005);animation:float 4s ease-in-out infinite}
+.env-back{position:absolute;inset:12% 4% 5%;background:linear-gradient(145deg,#f9dbe8,#d8c5f4);border-radius:12px;box-shadow:inset 0 0 0 1px #fff8}
+.env-flap{position:absolute;left:4%;right:4%;top:12%;height:58%;background:linear-gradient(135deg,#f3cfe0,#c9b5ec);clip-path:polygon(0 0,50% 75%,100% 0);filter:drop-shadow(0 3px 2px #0002)}
+.env-heart{position:absolute;left:50%;top:39%;transform:translate(-50%,-50%);font-size:38px;z-index:3;text-shadow:0 5px 18px #a75b88aa}
+.letter{width:min(650px,100%);margin:0 auto;padding:30px 28px 27px;background:linear-gradient(135deg,#fffafc,#f8eff9);color:#594b61;border-radius:18px;box-shadow:0 25px 70px #0005;position:relative}
+.letter:before{content:'';position:absolute;inset:8px;border:1px solid #d8c3d8;border-radius:13px;pointer-events:none}
+.letter p{position:relative;line-height:1.85;margin:0 auto 15px;color:#685b6d;font-weight:300}
+.signature{position:relative;font:2.35rem 'Parisienne',cursive;color:#9a5f82;margin-top:15px}
+.seal{position:absolute;right:25px;bottom:23px;width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:#fff0f5;color:#cf789c;font-size:19px;box-shadow:0 6px 18px #6b41661c}
+.closing{margin-top:27px;color:#cdbbd2;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+.brand{margin-top:12px;color:#a996ae;font-size:.58rem;letter-spacing:.28em}
+@keyframes float{50%{transform:translateY(-9px) rotate(1deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.page{padding:76px 14px 42px}.intro{font-size:.92rem;line-height:1.75}.letter{padding:25px 19px 24px}.letter p{font-size:.93rem}.signature{font-size:2rem}.seal{position:static;margin:15px auto 0}.orbit{width:115vw;height:115vw}}
+</style>
+</head>
+<body>
+<button class="music" id="music" type="button" aria-pressed="false">♫ Play music</button>
+<div class="stars"></div><div class="orbit"></div>
+<section class="page">
+  <main class="wrap">
+    <div class="eyebrow">this is not the end · just a pause</div>
+    <div class="envelope" aria-hidden="true">
+      <div class="env-back"></div><div class="env-flap"></div><div class="env-heart">♡</div>
+    </div>
+    <h1 id="title">Until Our <span>Next Memory</span></h1>
+    <p class="intro">A little collection of moments has come to its last page. But the memories don't have to end here.</p>
+    <article class="letter">
+      <p id="text">Happy Birthday once again. Keep smiling, keep growing, and keep being wonderfully you. I hope life gives us many more moments worth saving.</p>
+      <div class="signature" id="signature">With lots of love,</div>
+      <div class="seal">♡</div>
+    </article>
+    <div class="closing">keep the memories · make new ones · come back anytime</div>
+    <div class="brand">OPENWITHLOVE · OPEN A MOMENT. FEEL THE LOVE.</div>
+  </main>
+</section>
+<script src="config.js"></script>
+<script>
+document.title='OpenWithLove · '+(customer.goodbyeTitle||'Until Our Next Memory');
+document.getElementById('title').innerHTML=(customer.goodbyeTitle||'Until Our Next Memory').replace(/(Next Memory)/,'<span>$1</span>');
+document.getElementById('text').textContent=customer.goodbyeText||'';
+document.getElementById('signature').textContent=customer.signature||'';
+</script>
+<script src="app.js" data-persistent></script>
+</body>
+</html>

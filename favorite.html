@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenWithLove · My Favorite Person</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#40364a;--rose:#b76b8a;--paper:#fffaf7;--lav:#eee7ff}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;overflow-y:auto}
+body{color:var(--ink);font-family:'DM Sans',sans-serif;background:radial-gradient(circle at 20% 12%,rgba(255,255,255,.95) 0 7%,transparent 26%),radial-gradient(circle at 85% 80%,rgba(255,255,255,.8) 0 5%,transparent 25%),linear-gradient(135deg,#eee7ff 0%,#f8e1ee 48%,#fff7ed 100%)}
+.page{min-height:100vh;display:grid;place-items:center;padding:54px 18px 70px;position:relative}
+.glow{position:absolute;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+.g1{width:180px;height:180px;background:#fff;left:5%;top:16%;box-shadow:0 0 70px 25px rgba(255,255,255,.55)}
+.g2{width:150px;height:150px;background:#f7dff0;right:4%;bottom:10%;box-shadow:0 0 60px 20px rgba(255,220,239,.65)}
+.spark{position:absolute;color:#fff;font-size:22px;opacity:.65;animation:twinkle 3.5s ease-in-out infinite}
+.s1{left:14%;top:23%}.s2{right:16%;top:17%;animation-delay:1s}.s3{left:19%;bottom:18%;animation-delay:2s}.s4{right:20%;bottom:24%;animation-delay:.5s}
+.wrap{width:min(860px,100%);text-align:center;position:relative;z-index:2}
+.eyebrow{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rose)}
+h1{font:600 clamp(3rem,7vw,6rem)/.9 'Cormorant Garamond',serif;margin:12px 0 8px;color:#47394e}
+h1:after{content:'♡';display:block;font:1.2rem 'DM Sans';color:#c487a0;margin-top:14px}
+.sub{max-width:560px;margin:0 auto 20px;line-height:1.65;color:#685a6c;font-size:1rem}
+.note{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.8);color:#806377;font-size:.82rem;margin-bottom:18px}
+.polaroid{width:min(450px,88vw);margin:0 auto 22px;padding:13px 13px 25px;background:var(--paper);box-shadow:0 24px 60px rgba(70,48,72,.22);transform:rotate(-1.4deg);position:relative;transition:transform .45s ease,box-shadow .45s ease;cursor:pointer}
+.polaroid:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 30px 70px rgba(70,48,72,.27)}
+.polaroid:before,.polaroid:after{content:'';position:absolute;width:62px;height:20px;background:#ead7a8;opacity:.78;top:-9px}.polaroid:before{left:24px;transform:rotate(-7deg)}.polaroid:after{right:24px;transform:rotate(7deg)}
+.polaroid img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#eee;border-radius:2px}
+.caption{font-family:'Parisienne',cursive;font-size:clamp(1.55rem,4vw,2.15rem);color:#745468;margin-top:12px}
+.tap{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#a17b8e;margin-top:5px}
+.btn{display:inline-block;text-decoration:none;background:#fff;color:#7b5268;border:1px solid #ead2de;border-radius:999px;padding:12px 22px;box-shadow:0 8px 22px rgba(90,55,80,.1);transition:.25s}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(90,55,80,.16)}
+.music{position:fixed;right:16px;top:16px;z-index:20;border:0;border-radius:999px;padding:9px 13px;background:rgba(255,255,255,.78);color:#705467;cursor:pointer;backdrop-filter:blur(8px)}
+.heart{position:fixed;bottom:-30px;color:#d995b1;opacity:.35;font-size:18px;animation:rise 9s linear infinite;pointer-events:none}.h1{left:12%;animation-delay:1s}.h2{left:43%;animation-delay:4s}.h3{right:14%;animation-delay:2s}
+@keyframes rise{from{transform:translateY(0) rotate(0deg);opacity:0}15%{opacity:.35}85%{opacity:.35}to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@keyframes twinkle{0%,100%{transform:scale(.8);opacity:.35}50%{transform:scale(1.25);opacity:.85}}
+@media(max-width:600px){.page{padding:44px 14px 56px}.sub{font-size:.92rem}.note{font-size:.75rem}.polaroid{width:min(360px,90vw);padding:10px 10px 20px}.btn{font-size:.9rem}.spark{font-size:17px}}
+</style>
+</head>
+<body>
+<button class="music" id="music" type="button" aria-pressed="false">♫ Play music</button>
+<div class="glow g1"></div><div class="glow g2"></div>
+<div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">✦</div><div class="spark s4">✧</div>
+<div class="heart h1">♡</div><div class="heart h2">♡</div><div class="heart h3">♡</div>
+<section class="page">
+  <div class="wrap">
+    <div class="eyebrow">one last little thought</div>
+    <h1 id="title">My Favorite Person</h1>
+    <div class="note">✿ a memory worth keeping</div>
+    <p class="sub" id="sub">Some people make ordinary moments feel a little more special.</p>
+    <figure class="polaroid" id="card">
+      <img id="img" src="photos/photo1.svg" alt="A favorite memory">
+      <figcaption class="caption" id="caption">A memory I would choose again.</figcaption>
+      <div class="tap">tap the photo · hold the moment</div>
+    </figure>
+    <a class="btn" href="goodbye.html">One last page ♡</a>
+  </div>
+</section>
+<script src="config.js"></script>
+<script src="script.js"></script>
+<script>
+document.title='OpenWithLove · '+(customer.favoriteTitle||'My Favorite Person');
+document.getElementById('title').textContent=customer.favoriteTitle||'My Favorite Person';
+document.getElementById('sub').textContent=customer.favoriteSub||'Some people make ordinary moments feel a little more special.';
+document.getElementById('img').src=customer.favoriteImage||'photos/photo1.svg';
+document.getElementById('caption').textContent=customer.favoriteCaption||'A memory I would choose again.';
+const card=document.getElementById('card');
+card.addEventListener('click',()=>{card.classList.add('held');setTimeout(()=>card.classList.remove('held'),650);});
+</script>
+<script src="app.js" data-persistent></script>
+</body>
+</html>

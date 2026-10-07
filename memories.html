@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenWithLove · Our Memories</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-four{
+  min-height:100svh;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 28%,#fff 0,transparent 35%),
+    linear-gradient(145deg,#fff1f5 0%,#eee5fa 52%,#e5d9f3 100%);
+}
+.page-four:before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;
+  background-image:radial-gradient(#fff 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.page-four .wrap{position:relative;z-index:2;width:min(1020px,100%)}
+.page-four .intro{
+  max-width:620px;margin:0 auto 23px;color:#75657f;line-height:1.8;
+}
+.page-four h2{font-size:clamp(3.1rem,7vw,5.8rem);margin:12px 0}
+.memory-wall{
+  width:min(920px,100%);
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:20px 16px;
+  margin:8px auto 30px;
+  align-items:start;
+}
+.memory-card{
+  grid-column:span 4;
+  background:#fff;
+  padding:11px 11px 17px;
+  box-shadow:0 18px 35px rgba(77,57,91,.18);
+  transform:rotate(var(--tilt));
+  transition:.35s;
+  cursor:pointer;
+  position:relative;
+}
+.memory-card:nth-child(2),.memory-card:nth-child(5){margin-top:30px}
+.memory-card:nth-child(3),.memory-card:nth-child(6){margin-top:-8px}
+.memory-card:hover{transform:translateY(-8px) rotate(0deg) scale(1.025);z-index:4}
+.memory-card:before{
+  content:"";
+  position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:58px;height:17px;background:#f4c8d4aa;box-shadow:0 2px 4px #7b566b18;
+  rotate:-2deg;
+}
+.memory-card:nth-child(even):before{background:#d8c7eaaa;rotate:2deg}
+.memory-card img{
+  width:100%;display:block;aspect-ratio:1/1.04;
+  object-fit:cover;background:#eee4f1;
+}
+.memory-card figcaption{
+  min-height:43px;padding:12px 5px 0;
+  color:#4e424d;font:1.35rem Parisienne,cursive;
+}
+.memory-number{
+  position:absolute;right:12px;bottom:8px;
+  font-size:.55rem;letter-spacing:.15em;color:#ad96b8;
+}
+.lightbox{
+  position:fixed;inset:0;background:#33243de8;
+  display:none;place-items:center;z-index:50;padding:20px;
+}
+.lightbox.open{display:grid}
+.lightbox img{max-width:92vw;max-height:82vh;border:9px solid white;box-shadow:0 25px 80px #0007}
+.close{
+  position:absolute;right:18px;top:17px;width:43px;height:43px;
+  border:0;border-radius:50%;background:white;color:#4b3b58;
+  font-size:1.3rem;cursor:pointer;
+}
+.next{
+  display:inline-flex;align-items:center;gap:8px;
+  border:0;border-radius:999px;padding:15px 28px;
+  background:linear-gradient(100deg,#a876d0,#f17f9d);
+  color:#fff;font:600 .86rem 'DM Sans';text-decoration:none;
+  box-shadow:0 15px 35px rgba(133,92,164,.24);transition:.25s;
+}
+.next:hover{transform:translateY(-4px)}
+@media(max-width:760px){
+  .memory-wall{grid-template-columns:1fr 1fr;gap:17px 9px}
+  .memory-card,.memory-card:nth-child(2),.memory-card:nth-child(3),.memory-card:nth-child(5),.memory-card:nth-child(6){
+    grid-column:span 1;margin-top:0;
+  }
+  .memory-card figcaption{font-size:1.12rem}
+}
+@media(max-width:430px){
+  .memory-wall{grid-template-columns:1fr}
+  .memory-card{grid-column:1!important}
+}
+</style>
+</head>
+<body>
+<button class="music" id="music" type="button" aria-pressed="false">♫ Play music</button>
+
+<section class="page page-four">
+  <div class="wrap">
+    <small>little pieces of us</small>
+    <h2 id="title"></h2>
+    <p class="intro" id="sub"></p>
+    <div class="memory-wall" id="wall"></div>
+    <a class="next" href="surprise.html">A little surprise <span>🌷</span></a>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="close" id="close">×</button>
+  <img id="lightboxImg" alt="Memory">
+</div>
+
+<script src="config.js"></script>
+<script>
+const c=customer;
+document.getElementById("title").textContent=c.memoryTitle||"Our Favorite Memories";
+document.getElementById("sub").textContent=c.memorySub||"A little canvas of the moments worth keeping 📸";
+
+const wall=document.getElementById("wall");
+wall.innerHTML=(c.photos||[]).map((p,i)=>`
+  <figure class="memory-card" style="--tilt:${i%2?"1.5deg":"-1.2deg"}">
+    <img src="${p[0]}" alt="Memory ${i+1}">
+    <figcaption>${p[1]}</figcaption>
+    <span class="memory-number">0${i+1}</span>
+  </figure>
+`).join("");
+
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightboxImg");
+wall.querySelectorAll("img").forEach(img=>{
+  img.onclick=()=>{
+    lightboxImg.src=img.src;
+    lightbox.classList.add("open");
+  };
+});
+document.getElementById("close").onclick=()=>lightbox.classList.remove("open");
+lightbox.onclick=e=>{if(e.target===lightbox)lightbox.classList.remove("open")};
+
+</script>
+<script src="app.js" data-persistent></script>
+</body>
+</html>
